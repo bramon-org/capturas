@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([], function () {
     Route::get('', ['uses' => 'CapturesController@index', 'as' => 'captures.index']);
+
     Route::get('stations', ['uses' => 'StationsController@index', 'as' => 'stations.index', 'middleware' => ['admin']]);
+    Route::get('stations/{id}', ['uses' => 'StationsController@edit', 'as' => 'stations.edit', 'middleware' => ['admin']]);
+    Route::post('stations/{id}', ['uses' => 'StationsController@save', 'as' => 'stations.save', 'middleware' => ['admin']]);
+
     Route::get('operators', ['uses' => 'OperatorsController@index', 'as' => 'operators.index', 'middleware' => ['admin']]);
 });

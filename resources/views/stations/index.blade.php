@@ -19,6 +19,9 @@
                                         <span class="badge rounded-pill bg-secondary">{{ $station['source'] }}</span> <br>
                                         {{ $station['city'] }} - {{ $station['state'] }}
                                     </p>
+                                    @if (env('BRAMON_API_ROLE') === 'admin')
+                                    <a href="{{ route('stations.edit', ['id' => $station['id']]) }}" class="btn btn-link">Editar</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -26,25 +29,9 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted">
-                    <nav aria-label="...">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item @if ($estacoes['current_page'] === 1) disabled @endif">
-                                <a class="page-link" href="?page={{ $estacoes['current_page'] - 1 }}" tabindex="-1" aria-disabled="true">Anterior</a>
-                            </li>
-                            @for ($i=1; $i < $estacoes['last_page']; $i++)
-                                @if ($estacoes['current_page'] === $i)
-                                    <li class="page-item active" aria-current="page">
-                                        <a class="page-link" href="?page={{ $i }}">{{ $i }} <span class="sr-only">(atual)</span></a>
-                                    </li>
-                                @else
-                                    <li class="page-item"><a class="page-link" href="?page={{ $i }}">{{ $i }}</a></li>
-                                @endif
-                            @endfor
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ $estacoes['current_page']  + 1 }}">Próxima</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    @if (env('BRAMON_API_ROLE') === 'admin')
+                    <a href="{{ route('stations.edit', ['id' => 0]) }}">Adicionar</a>
+                    @endif
                 </div>
             </div>
         </div>
