@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
 
 class OperatorsController extends Controller
 {
     /**
+     * @param Request $request
      * @return Renderable
      */
-    public function index(): Renderable
+    public function index(Request $request): Renderable
     {
         $filter = [];
-        $page = 1;
-        $limit = 9;
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 12);
         $filters = urldecode(http_build_query($filter));
 
-        $operators = $this->doRequest('GET', 'operators?limit=12');
+        $operators = $this->doRequest('GET', "operators?limit={$limit}&page={$page}");
 
         return view('operators.index', ['operadores' => $operators]);
     }

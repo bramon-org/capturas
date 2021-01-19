@@ -81,10 +81,19 @@
                     <nav aria-label="...">
                         <ul class="pagination justify-content-center">
                             <li class="page-item @if ($capturas['current_page'] === 1) disabled @endif">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                                <a class="page-link" href="?page={{ $capturas['current_page'] - 1 }}" tabindex="-1" aria-disabled="true">Previous</a>
                             </li>
-                            <li class="page-item" @if ($capturas['current_page'] === $capturas['last_page']) disabled @endif">
-                                <a class="page-link" href="#">Próxima</a>
+                            @for ($i=1; $i < $capturas['last_page']; $i++)
+                                @if ($capturas['current_page'] === $i)
+                                    <li class="page-item active" aria-current="page">
+                                        <a class="page-link" href="?page={{ $i }}">{{ $i }} <span class="sr-only">(current)</span></a>
+                                    </li>
+                                @else
+                                    <li class="page-item"><a class="page-link" href="?page={{ $i }}">{{ $i }}</a></li>
+                                @endif
+                            @endfor
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ $capturas['current_page']  + 1 }}">Next</a>
                             </li>
                         </ul>
                     </nav>

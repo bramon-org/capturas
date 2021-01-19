@@ -29,19 +29,19 @@
                     <nav aria-label="...">
                         <ul class="pagination justify-content-center">
                             <li class="page-item @if ($estacoes['current_page'] === 1) disabled @endif">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                <a class="page-link" href="?page={{ $estacoes['current_page'] - 1 }}" tabindex="-1" aria-disabled="true">Previous</a>
                             </li>
                             @for ($i=1; $i < $estacoes['last_page']; $i++)
                                 @if ($estacoes['current_page'] === $i)
                                     <li class="page-item active" aria-current="page">
-                                        <a class="page-link" href="#">{{ $i }} <span class="sr-only">(current)</span></a>
+                                        <a class="page-link" href="?page={{ $i }}">{{ $i }} <span class="sr-only">(current)</span></a>
                                     </li>
                                 @else
-                                    <li class="page-item"><a class="page-link" href="#">{{ $i }}</a></li>
+                                    <li class="page-item"><a class="page-link" href="?page={{ $i }}">{{ $i }}</a></li>
                                 @endif
                             @endfor
                             <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
+                                <a class="page-link" href="?page={{ $estacoes['current_page']  + 1 }}">Next</a>
                             </li>
                         </ul>
                     </nav>
