@@ -27,6 +27,29 @@ class StationsController extends Controller
 
     /**
      * @param Request $request
+     * @return Renderable
+     */
+    public function new(Request $request): Renderable
+    {
+        $operadores = $this->doRequest('GET', "operators?limit=10000");
+
+        return view('stations.new', ['operadores' => $operadores]);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Redirector
+     */
+    public function add(Request $request)
+    {
+        $result = $this->doRequest('POST', "stations", $request->all());
+        $id = $result['station']['id'];
+
+        return redirect(route('stations.edit', ['id' => $id]));
+    }
+
+    /**
+     * @param Request $request
      * @param string $id
      * @return Renderable
      */

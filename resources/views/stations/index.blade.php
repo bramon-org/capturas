@@ -30,7 +30,7 @@
                 </div>
                 <div class="card-footer text-muted">
                     @if (env('BRAMON_API_ROLE') === 'admin')
-                    <a href="{{ route('stations.edit', ['id' => 0]) }}">Adicionar</a>
+                    <a href="{{ route('stations.new') }}">Adicionar</a>
                     @endif
                 </div>
             </div>
