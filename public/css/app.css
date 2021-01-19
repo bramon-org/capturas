@@ -1,0 +1,56 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+.station_list,
+.captures_list {
+    list-style-type: none;
+    display: block;
+    width: 100% !important;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.station_list {
+    text-align: left;
+}
+
+.station_list li {
+    list-style: none;
+    display: inline-block;
+    padding: 2px;
+    text-align: left;
+}
+
+.captures_list li {
+    list-style: none;
+    display: inline-block;
+    text-align: left;
+}
+
+.wp-block-separator {
+    display: block;
+    clear: both;
+    margin: 0;
+    padding: 0;
+}
+
+.captures_form {
+    margin-bottom: 30px;
+}
+
+.captures_form .filter_bottom {
+    display: inline-block;
+    min-width: 200px;
+}
+
+.captures_form .filter_bottom span {
+    display: block;
+    min-width: 200px;
+}
+
+.captures_form .filter_bottom select {
+    display: inline-block;
+    width: 300px;
+}
