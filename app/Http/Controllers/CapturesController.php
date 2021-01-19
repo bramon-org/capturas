@@ -15,7 +15,7 @@ class CapturesController extends Controller
     {
         $filter = [];
         $page = 1;
-        $limit = 9;
+        $limit = 12;
         $filters = urldecode(http_build_query($filter));
 
         $estacoes = $this->getStations();

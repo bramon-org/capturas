@@ -9,10 +9,10 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <form method="get" action="" class="captures_form">
-                            <ul class="station_list">
+                        <form method="get" action="" class="form">
+                            <ul class="list-inline p-2">
                                 @foreach($estacoes['data'] as $station)
-                                <li class="check-estacao">
+                                <li class="list-inline-item">
                                     <label for="station_{{ $station['id'] }}">
                                         <input type="checkbox" id="station_{{ $station['id'] }}" name="station[]" value="{{ $station['id'] }}">
                                         {{ $station['name'] }}
@@ -21,56 +21,60 @@
                                 @endforeach
                             </ul>
 
-                            <br style="clear: both">
+                            <div class="d-inline-flex">
+                                <label for="capture_date" class="form-label p-2">
+                                    <span>Data da captura:</span>
+                                    <input type="date" class="form-control" name="capture_date" id="capture_date" value="">
+                                </label>
 
-                            <label for="capture_date" class="filter_bottom">
-                                <span>Data da captura:</span>
-                                <input type="date" name="capture_date" id="capture_date" value="">
-                            </label>
+                                <label for="capture_radiant" class="form-label p-2">
+                                    <span>Radiante:</span>
+                                    <select name="capture_radiant" id="capture_radiant" class="form-control">
+                                        <option value=""></option>
+                                        @foreach ($radiantes as $radiant_id => $radiant_name)
+                                            <option value="{{ $radiant_id }}">{{ $radiant_id }} - {{ $radiant_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
 
-                            <label for="capture_radiant" class="filter_bottom">
-                                <span>Radiante:</span>
-                                <select name="capture_radiant" id="capture_radiant">
-                                    <option value=""></option>
-                                    @foreach ($radiantes as $radiant_id => $radiant_name)
-                                        <option value="{{ $radiant_id }}">{{ $radiant_id }} - {{ $radiant_name }}</option>
-                                    @endforeach
-                                </select>
-                            </label>
+                                <span class="p-2 align-self-end">
+                                    <input type="submit" class="btn btn-primary" value="Buscar" style="margin-bottom: 8px !important">
+                                </span>
+                            </div>
 
-                            <input type="submit" value="Buscar">
                         </form>
                     </div>
 
                     <hr>
 
                     <div class="row">
-                        <ul class="captures_list">
-                            @foreach ( $capturas['data'] as $capture)
-                                @php
-                                    $imagem = array_filter($capture['files'], function($file) {
-                                        return substr_count($file['filename'], 'T.jpg') !== 0;
-                                    });
-                                    $imagem = array_pop($imagem);
-                                @endphp
+                        @foreach ( $capturas['data'] as $capture)
+                            @php
+                                $imagem = array_filter($capture['files'], function($file) {
+                                    return substr_count($file['filename'], 'T.jpg') !== 0;
+                                });
+                                $imagem = array_pop($imagem);
+                            @endphp
 
-                                <li class="col-sm-6 col-lg-3">
-                                    <div class="bramon-captura">
-                                        <a href="{{ str_replace('T.jpg', 'P.jpg', $imagem['url']) }}" data-lightbox="roadtrip">
-                                            <img src="{{ $imagem['url'] }}" alt="{{ $imagem['filename'] }}">
-                                        </a>
-                                        <br>
-                                        @if ($capture['class'] !== '')
-                                            <span class="bramon-analisado">Não analisado</span> <br>
-                                        @else
-                                            <span class="bramon-analise">{{ $capture['class'] }}</span> <br>
-                                        @endif
-                                        <span class="bramon-estacao">{{ $capture['station']['name'] }}</span><br>
-                                        <span class="bramon-captured">{{ (new DateTime($capture['captured_at']))->format('d/m/Y H:i:s') }}</span>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="card">
+                                    <a href="{{ str_replace('T.jpg', 'P.jpg', $imagem['url']) }}" data-lightbox="roadtrip">
+                                        <img src="{{ $imagem['url'] }}" alt="{{ $imagem['filename'] }}" class="card-img-top">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $capture['station']['name'] }}</h5>
+                                        <p class="card-text">
+                                            @if ($capture['class'] !== '')
+                                                <span class="badge rounded-pill bg-secondary">Não analisado</span> <br>
+                                            @else
+                                                <span class="badge rounded-pill bg-primary">{{ $capture['class'] }}</span> <br>
+                                            @endif
+                                            {{ (new DateTime($capture['captured_at']))->format('d/m/Y H:i:s') }}
+                                        </p>
                                     </div>
-                                </li>
-                            @endforeach
-                        </ul>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
 
                     <br style="clear: both">
