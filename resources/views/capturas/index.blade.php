@@ -88,13 +88,13 @@
                                 $prevParams['page'] = $capturas['current_page'] - 1;
                             @endphp
                             <li class="page-item @if ($capturas['current_page'] === 1) disabled @endif">
-                                <a class="page-link" href="?{{ urldecode(http_build_query($prevParams)) }}" tabindex="-1" aria-disabled="true">Previous</a>
+                                <a class="page-link" href="?{{ urldecode(http_build_query($prevParams)) }}" tabindex="-1" aria-disabled="true">Anterior</a>
                             </li>
                             {{--
                             @for ($i=1; $i < $capturas['last_page']; $i++)
                                 @if ($capturas['current_page'] === $i)
                                     <li class="page-item active" aria-current="page">
-                                        <a class="page-link" href="?page={{ $i }}">{{ $i }} <span class="sr-only">(current)</span></a>
+                                        <a class="page-link" href="?page={{ $i }}">{{ $i }} <span class="sr-only">(atual)</span></a>
                                     </li>
                                 @else
                                     <li class="page-item"><a class="page-link" href="?page={{ $i }}">{{ $i }}</a></li>
@@ -107,7 +107,7 @@
                                     $nextParams['page'] = $capturas['current_page'] + 1;
                                 @endphp
 
-                                <a class="page-link" href="?{{ urldecode(http_build_query($nextParams)) }}">Next</a>
+                                <a class="page-link" href="?{{ urldecode(http_build_query($nextParams)) }}">Próxima</a>
                             </li>
                         </ul>
                     </nav>
