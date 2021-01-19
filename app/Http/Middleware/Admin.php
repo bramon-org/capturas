@@ -18,7 +18,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (env('BRAMON_API_ROLE', HttpClient::ROLE_GUEST) !== HttpClient::ROLE_ADMIN) {
+        if (env('BRAMON_API_ROLE', HttpClient::ROLE_SHARED) !== HttpClient::ROLE_ADMIN) {
             return abort(401);
         }
 

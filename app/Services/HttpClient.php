@@ -11,7 +11,7 @@ final class HttpClient extends Client
     const SANDBOX = 'sandbox';
 
     const ROLE_ADMIN = 'admin';
-    const ROLE_GUEST = 'shared';
+    const ROLE_SHARED = 'shared';
     const ROLE_OPERATOR = 'operator';
     const ROLE_EDITOR = 'editor';
 

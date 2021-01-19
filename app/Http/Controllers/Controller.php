@@ -18,7 +18,10 @@ class Controller extends BaseController
      */
     public function __construct()
     {
-        $this->httpClient = new HttpClient(env('BRAMON_API_TOKEN', 'BRAMON-TOKEN'));
+        $this->httpClient = new HttpClient(
+            env('BRAMON_API_TOKEN', 'BRAMON-TOKEN'),
+            env('BRAMON_API_ROLE', HttpClient::ROLE_SHARED),
+        );
     }
 
     /**

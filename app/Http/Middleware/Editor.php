@@ -17,7 +17,7 @@ class Editor
      */
     public function handle($request, Closure $next)
     {
-        if (env('BRAMON_API_ROLE', HttpClient::ROLE_GUEST) !== HttpClient::ROLE_EDITOR) {
+        if (env('BRAMON_API_ROLE', HttpClient::ROLE_SHARED) !== HttpClient::ROLE_EDITOR) {
             return abort(401);
         }
 

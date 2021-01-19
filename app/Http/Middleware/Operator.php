@@ -18,7 +18,7 @@ class Operator
      */
     public function handle($request, Closure $next)
     {
-        if (env('BRAMON_API_ROLE', HttpClient::ROLE_GUEST) !== HttpClient::ROLE_OPERATOR) {
+        if (env('BRAMON_API_ROLE', HttpClient::ROLE_SHARED) !== HttpClient::ROLE_OPERATOR) {
             return abort(401);
         }
 
