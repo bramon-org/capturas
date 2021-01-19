@@ -16,7 +16,7 @@ class OperatorsController extends Controller
         $limit = 9;
         $filters = urldecode(http_build_query($filter));
 
-        $operators = $this->doRequest('GET', 'operator/operators?limit=12');
+        $operators = $this->doRequest('GET', 'operators?limit=12');
 
         return view('operators.index', ['operadores' => $operators]);
     }

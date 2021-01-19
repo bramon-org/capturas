@@ -19,7 +19,7 @@ class CapturesController extends Controller
         $filters = urldecode(http_build_query($filter));
 
         $estacoes = $this->getStations();
-        $capturas = $this->doRequest('GET', "operator/captures?page={$page}&limit={$limit}&{$filters}");
+        $capturas = $this->doRequest('GET', "captures?page={$page}&limit={$limit}&{$filters}");
         $radiantes = $this->getRadiants();
 
         return view('capturas.index', ['estacoes' => $estacoes, 'capturas' => $capturas, 'radiantes' => $radiantes]);
@@ -31,7 +31,7 @@ class CapturesController extends Controller
             return Cache::get('stations');
         }
 
-        $stations = $this->doRequest('GET', 'operator/stations?limit=1000');
+        $stations = $this->doRequest('GET', 'stations?limit=1000');
 
         Cache::put('stations', $stations, Carbon::now()->addMinutes(10));
 
