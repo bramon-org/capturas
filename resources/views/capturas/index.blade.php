@@ -64,11 +64,12 @@
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $capture['station']['name'] }}</h5>
                                         <p class="card-text">
-                                            @if ($capture['class'] !== '')
+                                            @if ($capture['class'] == '')
                                                 <span class="badge rounded-pill bg-secondary">Não analisado</span> <br>
                                             @else
                                                 <span class="badge rounded-pill bg-primary">{{ $capture['class'] }}</span> <br>
                                             @endif
+
                                             {{ (new DateTime($capture['captured_at']))->format('d/m/Y H:i:s') }}
                                         </p>
                                     </div>
