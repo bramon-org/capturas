@@ -9,11 +9,27 @@
 
                 <div class="card-body">
                     <div class="row">
-                        Total de operadores: {{ $operadores['total'] }}
+                        <div class="row">
+                            @foreach($operadores['data'] as $operador)
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="card">
+                                        <img src="https://picsum.photos/320/240?grayscale&random={{ random_int(0, PHP_INT_MAX) }}" alt="Station picture" class="card-img-top">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $operador['name'] }}</h5>
+                                            <p class="card-text">
+                                                {{--
+                                                <span class="badge rounded-pill bg-secondary">{{ $operador['role'] }}</span> <br>
+                                                {{ $station['$operador'] }} - {{ $operador['mobile_phone'] }}
+                                                --}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-
-                    <br style="clear: both">
-
+                </div>
+                <div class="card-footer text-muted">
                     <nav aria-label="...">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
@@ -29,7 +45,6 @@
                             </li>
                         </ul>
                     </nav>
-
                 </div>
             </div>
         </div>

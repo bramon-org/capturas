@@ -9,22 +9,23 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <form method="get" action="" class="captures_form">
-                            <ul class="station_list">
-                                @foreach($estacoes['data'] as $station)
-                                <li class="check-estacao">
-                                    <label for="station_{{ $station['id'] }}">
-                                        <input type="checkbox" id="station_{{ $station['id'] }}" name="station[]" value="{{ $station['id'] }}">
-                                        {{ $station['name'] }}
-                                    </label>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </form>
+                        @foreach($estacoes['data'] as $station)
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card">
+                                <img src="https://picsum.photos/320/240?grayscale&random={{ random_int(0, PHP_INT_MAX) }}" alt="Station picture" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $station['name'] }}</h5>
+                                    <p class="card-text">
+                                        <span class="badge rounded-pill bg-secondary">{{ $station['source'] }}</span> <br>
+                                        {{ $station['city'] }} - {{ $station['state'] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                     </div>
-
-                    <hr>
-
+                </div>
+                <div class="card-footer text-muted">
                     <nav aria-label="...">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
@@ -40,7 +41,6 @@
                             </li>
                         </ul>
                     </nav>
-
                 </div>
             </div>
         </div>

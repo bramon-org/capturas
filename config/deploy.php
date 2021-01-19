@@ -111,7 +111,7 @@ return [
     */
 
     'hosts' => [
-        'panel.bramonmeteor.org' => [
+        'campbell.dreamhost.com' => [
             'deploy_path'   => env('DEPLOY_PATH'),
             'user'          => env('DEPLOY_USER'),
             'forwardAgent'  => true,

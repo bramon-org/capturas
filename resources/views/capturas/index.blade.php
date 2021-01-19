@@ -76,9 +76,8 @@
                             </div>
                         @endforeach
                     </div>
-
-                    <br style="clear: both">
-
+                </div>
+                <div class="card-footer text-muted">
                     <nav aria-label="...">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
@@ -94,7 +93,6 @@
                             </li>
                         </ul>
                     </nav>
-
                 </div>
             </div>
         </div>
