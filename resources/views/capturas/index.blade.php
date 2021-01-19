@@ -14,7 +14,7 @@
                                 @foreach($estacoes['data'] as $station)
                                 <li class="list-inline-item">
                                     <label for="station_{{ $station['id'] }}">
-                                        <input type="checkbox" id="station_{{ $station['id'] }}" name="station[]" value="{{ $station['id'] }}">
+                                        <input type="checkbox" id="station_{{ $station['id'] }}" name="station[]" value="{{ $station['id'] }}" @if (in_array($station['id'], request()->get('station', []))) checked="checked" @endif>
                                         {{ $station['name'] }}
                                     </label>
                                 </li>
@@ -24,15 +24,15 @@
                             <div class="d-inline-flex">
                                 <label for="capture_date" class="form-label p-2">
                                     <span>Data da captura:</span>
-                                    <input type="date" class="form-control" name="capture_date" id="capture_date" value="">
+                                    <input type="date" class="form-control" name="date" id="capture_date" value="{{ request()->get('date') }}">
                                 </label>
 
                                 <label for="capture_radiant" class="form-label p-2">
                                     <span>Radiante:</span>
-                                    <select name="capture_radiant" id="capture_radiant" class="form-control">
+                                    <select name="radiant" id="capture_radiant" class="form-control">
                                         <option value=""></option>
                                         @foreach ($radiantes as $radiant_id => $radiant_name)
-                                            <option value="{{ $radiant_id }}">{{ $radiant_id }} - {{ $radiant_name }}</option>
+                                            <option value="{{ $radiant_id }}" @if (in_array($radiant_id['id'], request()->get('radiant'))) selected="selected" @endif>{{ $radiant_id }} - {{ $radiant_name }}</option>
                                         @endforeach
                                     </select>
                                 </label>
@@ -78,10 +78,17 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted">
+                    @php
+                    $parameters = request()->all();
+                    @endphp
                     <nav aria-label="...">
                         <ul class="pagination justify-content-center">
+                            @php
+                                $prevParams = $parameters;
+                                $prevParams['page'] = $capturas['current_page'] - 1;
+                            @endphp
                             <li class="page-item @if ($capturas['current_page'] === 1) disabled @endif">
-                                <a class="page-link" href="?page={{ $capturas['current_page'] - 1 }}" tabindex="-1" aria-disabled="true">Previous</a>
+                                <a class="page-link" href="?{{ urldecode(http_build_query($prevParams)) }}" tabindex="-1" aria-disabled="true">Previous</a>
                             </li>
                             {{--
                             @for ($i=1; $i < $capturas['last_page']; $i++)
@@ -95,7 +102,12 @@
                             @endfor
                             --}}
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ $capturas['current_page']  + 1 }}">Next</a>
+                                @php
+                                    $nextParams = $parameters;
+                                    $nextParams['page'] = $capturas['current_page'] + 1;
+                                @endphp
+
+                                <a class="page-link" href="?{{ urldecode(http_build_query($nextParams)) }}">Next</a>
                             </li>
                         </ul>
                     </nav>

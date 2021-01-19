@@ -15,10 +15,25 @@ class CapturesController extends Controller
      */
     public function index(Request $request): Renderable
     {
-        $filter = [];
+        $filters = [];
+
+        if (!empty($request->get('date'))) {
+            $filters['filter[captured_at]'] = $request->get('date');
+        }
+
+        if (!empty($request->get('station'))) {
+            foreach ($request->get('station') as $station) {
+                $filters['filter[station]'][] = $station;
+            }
+        }
+
+        if (!empty($request->get('radiant'))) {
+            $filters['filter[class]'] = $request->get('radiant');
+        }
+
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 12);
-        $filters = urldecode(http_build_query($filter));
+        $filters = urldecode(http_build_query($filters));
 
         $estacoes = $this->getStations();
         $capturas = $this->doRequest('GET', "captures?page={$page}&limit={$limit}&{$filters}");

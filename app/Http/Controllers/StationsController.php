@@ -18,7 +18,7 @@ class StationsController extends Controller
         $limit = $request->get('limit', 12);
         $filters = urldecode(http_build_query($filter));
 
-        $estacoes = $this->doRequest('GET', "stations?limit={$limit}&page={$page}");
+        $estacoes = $this->doRequest('GET', "stations?limit={$limit}&page={$page}&{$filters}");
 
         return view('stations.index', ['estacoes' => $estacoes]);
     }
