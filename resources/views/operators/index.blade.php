@@ -17,10 +17,9 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $operador['name'] }}</h5>
                                             <p class="card-text">
-                                                {{--
-                                                <span class="badge rounded-pill bg-secondary">{{ $operador['role'] }}</span> <br>
-                                                {{ $station['$operador'] }} - {{ $operador['mobile_phone'] }}
-                                                --}}
+                                                @if (env('BRAMON_API_ROLE') === 'admin')
+                                                    <a href="{{ route('operators.edit', ['id' => $operador['id']]) }}" class="btn btn-link">Editar</a>
+                                                @endif
                                             </p>
                                         </div>
                                     </div>
@@ -49,6 +48,10 @@
                             </li>
                         </ul>
                     </nav>
+
+                    @if (env('BRAMON_API_ROLE') === 'admin')
+                        <a href="{{ route('operators.new') }}">Adicionar</a>
+                    @endif
                 </div>
             </div>
         </div>

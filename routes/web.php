@@ -14,8 +14,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group([], function () {
+    #Captures
     Route::get('', ['uses' => 'CapturesController@index', 'as' => 'captures.index']);
 
+    # Stations
     Route::get('stations', ['uses' => 'StationsController@index', 'as' => 'stations.index', 'middleware' => ['admin']]);
 
     Route::get('stations/new', ['uses' => 'StationsController@new', 'as' => 'stations.new', 'middleware' => ['admin']]);
@@ -24,5 +26,12 @@ Route::group([], function () {
     Route::get('stations/{id}', ['uses' => 'StationsController@edit', 'as' => 'stations.edit', 'middleware' => ['admin']]);
     Route::post('stations/{id}', ['uses' => 'StationsController@save', 'as' => 'stations.save', 'middleware' => ['admin']]);
 
+    # Operators
     Route::get('operators', ['uses' => 'OperatorsController@index', 'as' => 'operators.index', 'middleware' => ['admin']]);
+
+    Route::get('operators/new', ['uses' => 'OperatorsController@new', 'as' => 'operators.new', 'middleware' => ['admin']]);
+    Route::post('operators/new', ['uses' => 'OperatorsController@add', 'as' => 'operators.add', 'middleware' => ['admin']]);
+
+    Route::get('operators/{id}', ['uses' => 'OperatorsController@edit', 'as' => 'operators.edit', 'middleware' => ['admin']]);
+    Route::post('operators/{id}', ['uses' => 'OperatorsController@save', 'as' => 'operators.save', 'middleware' => ['admin']]);
 });
