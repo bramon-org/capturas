@@ -32,7 +32,7 @@
                                     <select name="radiant" id="capture_radiant" class="form-control">
                                         <option value=""></option>
                                         @foreach ($radiantes as $radiant_id => $radiant_name)
-                                            <option value="{{ $radiant_id }}" @if (in_array($radiant_id['id'], request()->get('radiant'))) selected="selected" @endif>{{ $radiant_id }} - {{ $radiant_name }}</option>
+                                            <option value="{{ $radiant_id }}" @if ($radiant_id == request()->get('radiant')) selected="selected" @endif>{{ $radiant_id }} - {{ $radiant_name }}</option>
                                         @endforeach
                                     </select>
                                 </label>
