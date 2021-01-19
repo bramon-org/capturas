@@ -83,6 +83,7 @@
                             <li class="page-item @if ($capturas['current_page'] === 1) disabled @endif">
                                 <a class="page-link" href="?page={{ $capturas['current_page'] - 1 }}" tabindex="-1" aria-disabled="true">Previous</a>
                             </li>
+                            {{--
                             @for ($i=1; $i < $capturas['last_page']; $i++)
                                 @if ($capturas['current_page'] === $i)
                                     <li class="page-item active" aria-current="page">
@@ -92,6 +93,7 @@
                                     <li class="page-item"><a class="page-link" href="?page={{ $i }}">{{ $i }}</a></li>
                                 @endif
                             @endfor
+                            --}}
                             <li class="page-item">
                                 <a class="page-link" href="?page={{ $capturas['current_page']  + 1 }}">Next</a>
                             </li>
