@@ -115,7 +115,7 @@ return [
             'deploy_path'   => env('DEPLOY_PATH'),
             'user'          => env('DEPLOY_USER'),
             'forwardAgent'  => true,
-            'multiplexing'  => false,
+            'multiplexing'  => true,
             'bin/php'       => '/usr/local/php74/bin/php',
             'sshOptions'    => [
                 'UserKnownHostsFile'    => '/dev/null',
