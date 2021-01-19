@@ -69,13 +69,9 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
-
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware(['admin' => App\Http\Middleware\Admin::class]);
+$app->routeMiddleware(['operator' => App\Http\Middleware\Operator::class]);
+$app->routeMiddleware(['editor' => App\Http\Middleware\Editor::class]);
 
 /*
 |--------------------------------------------------------------------------

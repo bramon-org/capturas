@@ -13,6 +13,7 @@ final class HttpClient extends Client
     const ROLE_ADMIN = 'admin';
     const ROLE_GUEST = 'shared';
     const ROLE_OPERATOR = 'operator';
+    const ROLE_EDITOR = 'editor';
 
     const CLIENT_URLS = [
         self::PRODUCTION => 'https://api.bramonmeteor.org/v1/',

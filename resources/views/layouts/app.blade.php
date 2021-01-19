@@ -35,15 +35,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('captures.index') }}">{{ __('Home') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('operators.index') }}">{{ __('Operadores') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('stations.index') }}">{{ __('Estações') }}</a>
-                        </li>
+                        @if (env('BRAMON_API_ROLE', 'shared') === \App\Services\HttpClient::ROLE_ADMIN)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('captures.index') }}">{{ __('Home') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('operators.index') }}">{{ __('Operadores') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('stations.index') }}">{{ __('Estações') }}</a>
+                            </li>
+                        @endif
                         {{--
                         <li class="nav-item">
                         <li class="nav-item dropdown">

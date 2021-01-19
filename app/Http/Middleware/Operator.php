@@ -2,9 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
+use App\Services\HttpClient;
 use Closure;
+use Illuminate\Support\Facades\Log;
 
-class ExampleMiddleware
+class Operator
 {
     /**
      * Handle an incoming request.
@@ -15,6 +18,10 @@ class ExampleMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if (env('BRAMON_API_ROLE', HttpClient::ROLE_GUEST) !== HttpClient::ROLE_OPERATOR) {
+            return abort(401);
+        }
+
         return $next($request);
     }
 }
