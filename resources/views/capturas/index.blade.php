@@ -117,7 +117,7 @@
                                     $nextParams['page'] = $capturas['current_page'] + 1;
                                 @endphp
 
-                                <a class="page-link" href="?{{ urldecode(http_build_query($nextParams)) }}">Próxima</a>
+                                <a class="page-link @if ($capturas['current_page'] === $capturas['last_page']) disabled @endif" href="?{{ urldecode(http_build_query($nextParams)) }}">Próxima</a>
                             </li>
                         </ul>
                     </nav>

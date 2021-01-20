@@ -46,7 +46,7 @@
                                 @endif
                             @endfor
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ $operadores['current_page']  + 1 }}">Próxima</a>
+                                <a class="page-link @if ($operadores['current_page'] === $operadores['last_page']) disabled @endif" href="?page={{ $operadores['current_page']  + 1 }}">Próxima</a>
                             </li>
                         </ul>
                     </nav>
