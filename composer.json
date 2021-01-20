@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.4",
         "ext-json": "*",
+        "flipbox/lumen-generator": "^8.2",
         "guzzlehttp/guzzle": "7.0",
         "laravel/lumen-framework": "^8.0",
         "lorisleiva/laravel-deployer": "^0.3.5"
