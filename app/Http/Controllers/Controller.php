@@ -83,7 +83,7 @@ class Controller extends BaseController
 
         $stations = $this->doRequest('GET', 'stations?limit=1000');
 
-        Cache::put('stations', $stations, Carbon::now()->addMinutes(10));
+        Cache::put('stations', $stations, Carbon::now()->addMinutes(60));
 
         return $stations;
     }
