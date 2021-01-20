@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([], function () {
     #Captures
     Route::get('', ['uses' => 'CapturesController@index', 'as' => 'captures.index']);
+    Route::get('analysis', ['uses' => 'AnalysisController@index', 'as' => 'analysis.index']);
 
     # Stations
     Route::get('stations', ['uses' => 'StationsController@index', 'as' => 'stations.index', 'middleware' => ['admin']]);

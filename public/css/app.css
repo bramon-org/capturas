@@ -5,3 +5,7 @@
 .card {
     margin-bottom: .5em;
 }
+.map {
+    height: 600px;
+    width: 100%;
+}
