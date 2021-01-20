@@ -15,8 +15,8 @@
                                 <label for="station-source" class="form-label p-2">
                                     <span>Fonte</span>
                                     <select name="source" id="station-source" class="form-control">
-                                        <option value="UFO" selected="selected">UFO Capture</option>
-                                        <option value="RMS">RMS</option>
+                                        <option value="UFO"  @if ('UFO' == request()->get('source', 'UFO')) selected="selected" @endif>UFO Capture</option>
+                                        <option value="RMS"  @if ('RMS' == request()->get('source', 'UFO')) selected="selected" @endif>RMS</option>
                                     </select>
                                 </label>
                                 <label for="station-name" class="form-label p-2">
