@@ -99,7 +99,7 @@
                                 @endif
                             @endfor
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ $estacoes['current_page']  + 1 }}">Próxima</a>
+                                <a class="page-link  @if (empty($capturas['next_page_url'])) disabled @endif" href="?page={{ $estacoes['current_page']  + 1 }}">Próxima</a>
                             </li>
                         </ul>
                     </nav>
