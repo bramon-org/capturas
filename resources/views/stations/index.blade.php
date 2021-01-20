@@ -67,7 +67,7 @@
                         @foreach($estacoes['data'] as $station)
                         <div class="col-sm-6 col-lg-3">
                             <div class="card">
-                                <img src="https://picsum.photos/320/240?grayscale&random={{ random_int(0, PHP_INT_MAX) }}" alt="Station picture" class="card-img-top">
+                                <img src="https://picsum.photos/id/180/320/240?grayscale" alt="Station picture" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $station['name'] }}</h5>
                                     <p class="card-text">
