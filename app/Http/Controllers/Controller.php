@@ -80,12 +80,12 @@ class Controller extends BaseController
     protected function getAllStations()
     {
         if (Cache::has('stations')) {
-            return Cache::get('stations');
+            return json_decode(Cache::get('stations'), true);
         }
 
         $stations = $this->doRequest('GET', 'stations?limit=1000');
 
-        Cache::put('stations', $stations, Carbon::now()->addMinutes(60));
+        Cache::put('stations', json_encode($stations), Carbon::now()->addMinutes(60));
 
         return $stations;
     }

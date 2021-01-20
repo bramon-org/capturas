@@ -57,7 +57,7 @@
                     <hr>
 
                     <div class="row">
-                        @foreach ( $capturas['data'] as $capture)
+                        @foreach ($capturas['data'] as $capture)
                             @php
                                 $imagem = array_filter($capture['files'], function($file) {
                                     return substr_count($file['filename'], 'T.jpg') !== 0;
