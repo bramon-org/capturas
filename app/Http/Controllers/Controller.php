@@ -43,7 +43,9 @@ class Controller extends BaseController
 
             $json = $response->getBody()->getContents();
         } catch (ClientException|Error|GuzzleException $error) {
-            $json = $error->getResponse()->getBody()->getContents() ?? $error->getMessage();
+            $json = ['error' => $error->getMessage()];
+
+            info($error->getTraceAsString());
         }
 
         $jsonConverted = mb_convert_encoding($json, "UTF-8");
