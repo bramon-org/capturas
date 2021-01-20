@@ -8,6 +8,61 @@
                 <div class="card-header">{{ __('Estações') }}</div>
 
                 <div class="card-body">
+
+                    <div class="row">
+                        <form method="get" action="" class="form">
+                            <div class="d-inline-flex">
+                                <label for="station-source" class="form-label p-2">
+                                    <span>Fonte</span>
+                                    <select name="source" id="station-source" class="form-control">
+                                        <option value="UFO" selected="selected">UFO Capture</option>
+                                        <option value="RMS">RMS</option>
+                                    </select>
+                                </label>
+                                <label for="station-name" class="form-label p-2">
+                                    <span>Nome</span>
+                                    <input type="text" class="form-control" name="name" id="station-name" value="{{ request()->get('name') }}">
+                                </label>
+                                <label for="station-city" class="form-label p-2">
+                                    <span>Cidade</span>
+                                    <input type="text" class="form-control" name="city" id="station-city" value="{{ request()->get('city') }}">
+                                </label>
+                                <label for="station-state" class="form-label p-2">
+                                    <span>Estado</span>
+                                    <input type="text" class="form-control" name="state" id="station-state" value="{{ request()->get('state') }}">
+                                </label>
+                                <label for="station-country" class="form-label p-2">
+                                    <span>País</span>
+                                    <input type="text" class="form-control" name="country" id="station-country" value="{{ request()->get('country') }}">
+                                </label>
+                                <label for="station-active" class="form-label p-2">
+                                    <span>Ativa</span>
+                                    <input type="checkbox" class="form-control" name="active" id="station-active" value="1" @if (request()->get('active')) checked="checked" @endif>
+                                </label>
+                                <label for="station-visible" class="form-label p-2">
+                                    <span>Visível</span>
+                                    <input type="checkbox" class="form-control" name="visible" id="station-visible" value="1" @if (request()->get('visible')) checked="checked" @endif>
+                                </label>
+
+                                <label for="capture_limit" class="form-label p-2">
+                                    <span>Limite:</span>
+                                    <select name="limit" id="capture_limit" class="form-control">
+                                        @foreach ([12, 24, 48, 100] as $limit)
+                                            <option value="{{ $limit }}" @if ($limit == request()->get('limit', 12)) selected="selected" @endif>{{ $limit }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+
+                                <span class="p-2 align-self-end">
+                                    <input type="submit" class="btn btn-primary" value="Buscar" style="margin-bottom: 8px !important">
+                                </span>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <hr>
+
                     <div class="row">
                         @foreach($estacoes['data'] as $station)
                         <div class="col-sm-6 col-lg-3">
@@ -48,7 +103,7 @@
                             </li>
                         </ul>
                     </nav>
-                    
+
                     @if (env('BRAMON_API_ROLE') === 'admin')
                     <a href="{{ route('stations.new') }}">Adicionar</a>
                     @endif

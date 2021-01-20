@@ -37,6 +37,15 @@
                                     </select>
                                 </label>
 
+                                <label for="capture_limit" class="form-label p-2">
+                                    <span>Limite:</span>
+                                    <select name="limit" id="capture_limit" class="form-control">
+                                        @foreach ([12, 24, 48, 100] as $limit)
+                                            <option value="{{ $limit }}" @if ($limit == request()->get('limit', 12)) selected="selected" @endif>{{ $limit }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+
                                 <span class="p-2 align-self-end">
                                     <input type="submit" class="btn btn-primary" value="Buscar" style="margin-bottom: 8px !important">
                                 </span>

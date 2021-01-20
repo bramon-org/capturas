@@ -15,10 +15,40 @@ class StationsController extends Controller
      */
     public function index(Request $request): Renderable
     {
-        $filter = [];
+        $filters = [];
+
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 12);
-        $filters = urldecode(http_build_query($filter));
+
+        if (!empty($request->get('source'))) {
+            $filters['filter[source]'] = $request->get('source');
+        }
+
+        if (!empty($request->get('name'))) {
+            $filters['filter[name]'] = $request->get('name');
+        }
+
+        if (!empty($request->get('city'))) {
+            $filters['filter[city]'] = $request->get('city');
+        }
+
+        if (!empty($request->get('state'))) {
+            $filters['filter[state]'] = $request->get('state');
+        }
+
+        if (!empty($request->get('country'))) {
+            $filters['filter[country]'] = $request->get('country');
+        }
+
+        if (!empty($request->get('active'))) {
+            $filters['filter[active]'] = $request->get('active');
+        }
+
+        if (!empty($request->get('visible'))) {
+            $filters['filter[visible]'] = $request->get('visible');
+        }
+
+        $filters = urldecode(http_build_query($filters));
 
         $estacoes = $this->doRequest('GET', "stations?limit={$limit}&page={$page}&{$filters}");
 

@@ -18,7 +18,7 @@
                                             <h5 class="card-title">{{ $operador['name'] }}</h5>
                                             <p class="card-text">
                                                 {{ $operador['email'] }} <br>
-                                                {{ $operador['mobile_phone'] }} <br>
+
                                                 @if (env('BRAMON_API_ROLE') === 'admin')
                                                     <a href="{{ route('operators.edit', ['id' => $operador['id']]) }}" class="btn btn-link">Editar</a>
                                                 @endif
