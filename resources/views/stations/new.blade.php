@@ -21,7 +21,7 @@
                                 <span>Operador</span>
                                 <select name="user_id" id="station-operator" class="form-control" required>
                                     @foreach($operadores['data'] as $operador)
-                                    <option value="{{ $operador['id'] }}">{{ $operador['name'] }}</option>
+                                    <option value="{{ $operador['id'] }}">{{ $operador['name'] }} ({{ $operador['email'] ?? '' }})</option>
                                     @endforeach
                                 </select>
                             </label>

@@ -18,14 +18,6 @@
                                 <span>Email</span>
                                 <input type="email" class="form-control" name="email" id="operator-email" value="{{ request()->get('email') }}" required>
                             </label>
-                            <label for="operator-city" class="form-label p-2">
-                                <span>Cidade</span>
-                                <input type="text" class="form-control" name="city" id="operator-city" value="{{ request()->get('city') }}" required>
-                            </label>
-                            <label for="operator-state" class="form-label p-2">
-                                <span>Estado</span>
-                                <input type="text" class="form-control" name="state" id="operator-state" value="{{ request()->get('state') }}" required>
-                            </label>
                             <label for="operator-phone-number" class="form-label p-2">
                                 <span>Telefone</span>
                                 <input type="text" class="form-control" name="mobile_phone" id="operator-phone-number" value="{{ request()->get('mobile_phone') }}" required>
