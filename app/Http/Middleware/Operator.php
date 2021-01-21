@@ -2,23 +2,22 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use App\Services\HttpClient;
 use Closure;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class Operator
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        if (env('BRAMON_API_ROLE', HttpClient::ROLE_SHARED) !== HttpClient::ROLE_OPERATOR) {
+        if (env('BRAMON_API_ROLE', HttpClient::ROLE_PUBLIC) !== HttpClient::ROLE_OPERATOR) {
             return abort(401);
         }
 

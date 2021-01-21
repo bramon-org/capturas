@@ -23,7 +23,7 @@ class Controller extends BaseController
     {
         $this->httpClient = new HttpClient(
             env('BRAMON_API_TOKEN', 'BRAMON-TOKEN'),
-            env('BRAMON_API_ROLE', HttpClient::ROLE_SHARED),
+            env('BRAMON_API_ROLE', HttpClient::ROLE_PUBLIC),
         );
     }
 

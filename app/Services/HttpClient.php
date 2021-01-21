@@ -11,9 +11,8 @@ final class HttpClient extends Client
     const SANDBOX = 'sandbox';
 
     const ROLE_ADMIN = 'admin';
-    const ROLE_SHARED = 'shared';
+    const ROLE_PUBLIC = 'public';
     const ROLE_OPERATOR = 'operator';
-    const ROLE_EDITOR = 'editor';
 
     const CLIENT_URLS = [
         self::PRODUCTION => 'https://api.bramonmeteor.org/v1/',
