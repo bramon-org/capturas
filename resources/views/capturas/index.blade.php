@@ -11,14 +11,18 @@
                     <div class="row">
                         <form method="get" action="" class="form">
                             <ul class="list-inline p-2">
-                                @foreach($estacoes['data'] as $station)
+                                @forelse($estacoes['data'] as $station)
                                 <li class="list-inline-item">
                                     <label for="station_{{ $station['id'] }}">
                                         <input type="checkbox" id="station_{{ $station['id'] }}" name="station[]" value="{{ $station['id'] }}" @if (in_array($station['id'], request()->get('station', []))) checked="checked" @endif>
                                         {{ $station['name'] }}
                                     </label>
                                 </li>
-                                @endforeach
+                                @empty
+                                    <div class="alert">
+                                        Erro carregando estações
+                                    </div>
+                                @endforelse
                             </ul>
 
                             <div class="d-inline-flex">
@@ -57,7 +61,7 @@
                     <hr>
 
                     <div class="row">
-                        @foreach ($capturas['data'] as $capture)
+                        @forelse ($capturas['data'] as $capture)
                             @php
                                 $imagem = array_filter($capture['files'], function($file) {
                                     return substr_count($file['filename'], 'T.jpg') !== 0;
@@ -84,7 +88,11 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="alert">
+                                Sem capturas
+                            </div>
+                        @endforelse
                     </div>
                 </div>
                 <div class="card-footer text-muted">
@@ -92,6 +100,7 @@
                     $parameters = request()->all();
                     @endphp
                     <nav aria-label="...">
+                        @if ($capturas)
                         <ul class="pagination justify-content-center">
                             @php
                                 $prevParams = $parameters;
@@ -100,17 +109,6 @@
                             <li class="page-item @if ($capturas['current_page'] === 1) disabled @endif">
                                 <a class="page-link" href="?{{ urldecode(http_build_query($prevParams)) }}" tabindex="-1" aria-disabled="true">Anterior</a>
                             </li>
-                            {{--
-                            @for ($i=1; $i < $capturas['last_page']; $i++)
-                                @if ($capturas['current_page'] === $i)
-                                    <li class="page-item active" aria-current="page">
-                                        <a class="page-link" href="?page={{ $i }}">{{ $i }} <span class="sr-only">(atual)</span></a>
-                                    </li>
-                                @else
-                                    <li class="page-item"><a class="page-link" href="?page={{ $i }}">{{ $i }}</a></li>
-                                @endif
-                            @endfor
-                            --}}
                             <li class="page-item">
                                 @php
                                     $nextParams = $parameters;
@@ -120,6 +118,7 @@
                                 <a class="page-link @if (empty($capturas['next_page_url'])) disabled @endif" href="?{{ urldecode(http_build_query($nextParams)) }}">Próxima</a>
                             </li>
                         </ul>
+                        @endif
                     </nav>
                 </div>
             </div>
