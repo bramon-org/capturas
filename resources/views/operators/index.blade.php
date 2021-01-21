@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="row">
-                            @foreach($operadores['data'] as $operador)
+                            @forelse($operadores['data'] as $operador)
                                 <div class="col-sm-6 col-lg-3">
                                     <div class="card">
                                         <img src="https://picsum.photos/id/1/320/240?grayscale" alt="Station picture" class="card-img-top">
@@ -26,7 +26,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <div class="alert">
+                                    Sem operadores
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>

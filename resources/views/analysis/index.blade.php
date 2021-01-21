@@ -11,14 +11,18 @@
                     <div class="row">
                         <form method="get" action="" class="form">
                             <ul class="list-inline p-2">
-                                @foreach($estacoes['data'] as $station)
+                                @forelse($estacoes['data'] as $station)
                                 <li class="list-inline-item">
                                     <label for="station_{{ $station['id'] }}">
                                         <input type="checkbox" id="station_{{ $station['id'] }}" name="station[]" value="{{ $station['id'] }}" @if (in_array($station['id'], request()->get('station', []))) checked="checked" @endif>
                                         {{ $station['name'] }}
                                     </label>
                                 </li>
-                                @endforeach
+                                @empty
+                                    <div class="alert">
+                                        Erro carregando estações
+                                    </div>
+                                @endforelse
                             </ul>
 
                             <div class="d-inline-flex">
@@ -69,36 +73,38 @@
                     <hr>
 
                     <div class="row">
-                        @if (array_key_exists('data', $capturas))
-                            @foreach ($capturas['data'] as $captura)
-                                @php
-                                    $imagem = array_filter($captura['files'], function($file) {
-                                        return substr_count($file['filename'], 'T.jpg') !== 0;
-                                    });
-                                    $imagem = array_pop($imagem);
-                                @endphp
+                        @forelse ($capturas['data'] as $capture)
+                            @php
+                                $imagem = array_filter($captura['files'], function($file) {
+                                    return substr_count($file['filename'], 'T.jpg') !== 0;
+                                });
+                                $imagem = array_pop($imagem);
+                            @endphp
 
-                                <div class="col-sm-6 col-lg-3">
-                                    <div class="card">
-                                        <a href="{{ str_replace('T.jpg', 'P.jpg', $imagem['url']) }}" data-lightbox="roadtrip">
-                                            <img src="{{ $imagem['url'] }}" alt="{{ $imagem['filename'] }}" class="card-img-top">
-                                        </a>
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $captura['station']['name'] }}</h5>
-                                            <p class="card-text">
-                                                @if ($captura['class'] == '')
-                                                    <span class="badge rounded-pill bg-secondary">Não analisado</span> <br>
-                                                @else
-                                                    <span class="badge rounded-pill bg-primary">{{ $captura['class'] }}</span> <br>
-                                                @endif
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="card">
+                                    <a href="{{ str_replace('T.jpg', 'P.jpg', $imagem['url']) }}" data-lightbox="roadtrip">
+                                        <img src="{{ $imagem['url'] }}" alt="{{ $imagem['filename'] }}" class="card-img-top">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $captura['station']['name'] }}</h5>
+                                        <p class="card-text">
+                                            @if ($captura['class'] == '')
+                                                <span class="badge rounded-pill bg-secondary">Não analisado</span> <br>
+                                            @else
+                                                <span class="badge rounded-pill bg-primary">{{ $captura['class'] }}</span> <br>
+                                            @endif
 
-                                                {{ (new DateTime($captura['captured_at']))->format('d/m/Y H:i:s') }}
-                                            </p>
-                                        </div>
+                                            {{ (new DateTime($captura['captured_at']))->format('d/m/Y H:i:s') }}
+                                        </p>
                                     </div>
                                 </div>
-                            @endforeach
-                        @endif
+                            </div>
+                        @empty
+                            <div class="alert">
+                                Sem capturas
+                            </div>
+                        @endforelse
 
                         <div id="map" class="map"></div>
                         <script type="text/javascript">
