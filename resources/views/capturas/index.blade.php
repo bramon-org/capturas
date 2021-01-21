@@ -11,7 +11,7 @@
                     <div class="row">
                         <form method="get" action="" class="form">
                             <ul class="list-inline p-2">
-                                @forelse($estacoes['data'] as $station)
+                                @forelse($estacoes as $station)
                                 <li class="list-inline-item">
                                     <label for="station_{{ $station['id'] }}">
                                         <input type="checkbox" id="station_{{ $station['id'] }}" name="station[]" value="{{ $station['id'] }}" @if (in_array($station['id'], request()->get('station', []))) checked="checked" @endif>
