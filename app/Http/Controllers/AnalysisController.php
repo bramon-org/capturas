@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class AnalysisController extends Controller
 {
@@ -41,7 +43,16 @@ class AnalysisController extends Controller
         $capturas = [];
 
         if (!empty($filters)) {
-            $capturas = $this->doRequest('GET', "captures?page={$page}&limit={$limit}&{$filters}");
+            $uri = "captures?page={$page}&limit={$limit}&{$filters}";
+            $hash = md5('analysis_' . $uri);
+
+            if (Cache::has($hash)) {
+                return Cache::get($hash);
+            }
+
+            $capturas = $this->doRequest('GET', $uri);
+
+            Cache::put($hash, $capturas, Carbon::now()->addMinutes(2));
         }
 
         return view('analysis.index', ['estacoes' => $estacoes, 'capturas' => $capturas, 'radiantes' => $radiantes]);
