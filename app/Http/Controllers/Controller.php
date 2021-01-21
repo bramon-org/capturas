@@ -61,7 +61,7 @@ class Controller extends BaseController
                 'total' => 1,
             ]);
 
-            info($error->getMessage(), $error->getTraceAsString());
+            info([$error->getMessage(), $error->getTraceAsString()]);
         }
 
         $jsonConverted = mb_convert_encoding($json, "UTF-8");
