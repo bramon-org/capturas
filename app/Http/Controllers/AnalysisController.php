@@ -46,13 +46,9 @@ class AnalysisController extends Controller
             $uri = "captures?page={$page}&limit={$limit}&{$filters}";
             $hash = md5('analysis_' . $uri);
 
-            if (Cache::has($hash)) {
-                return Cache::get($hash);
-            }
-
-            $capturas = $this->doRequest('GET', $uri);
-
-            Cache::put($hash, $capturas, Carbon::now()->addMinutes(2));
+            $capturas = Cache::get($hash, function() use($uri) {
+                return $this->doRequest('GET', $uri);
+            });
         }
 
         return view('analysis.index', ['estacoes' => $estacoes, 'capturas' => $capturas, 'radiantes' => $radiantes]);

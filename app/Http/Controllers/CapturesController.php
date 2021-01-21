@@ -38,15 +38,12 @@ class CapturesController extends Controller
         $uri = "captures?page={$page}&limit={$limit}&{$filters}";
         $hash = md5('capturas_' . $uri);
 
-        if (Cache::has($hash)) {
-            return Cache::get($hash);
-        }
-
         $estacoes = $this->getAllStations();
         $radiantes = $this->getRadiants();
-        $capturas = $this->doRequest('GET', $uri);
 
-        Cache::put($hash, $capturas, Carbon::now()->addMinutes(2));
+        $capturas = Cache::get($hash, function() use($uri) {
+            return $this->doRequest('GET', $uri);
+        });
 
         return view('capturas.index', ['estacoes' => $estacoes, 'capturas' => $capturas, 'radiantes' => $radiantes]);
     }
