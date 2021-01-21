@@ -27,12 +27,12 @@
 
                             <div class="d-inline-flex">
                                 <label for="capture_date" class="form-label p-2">
-                                    <span>Data da captura:</span>
+                                    <span>Data da captura</span>
                                     <input type="date" class="form-control" name="date" id="capture_date" value="{{ request()->get('date') }}">
                                 </label>
 
                                 <label for="capture_radiant" class="form-label p-2">
-                                    <span>Radiante:</span>
+                                    <span>Radiante</span>
                                     <select name="radiant" id="capture_radiant" class="form-control">
                                         <option value=""></option>
                                         @foreach ($radiantes as $radiant_id => $radiant_name)
@@ -42,12 +42,17 @@
                                 </label>
 
                                 <label for="capture_limit" class="form-label p-2">
-                                    <span>Limite:</span>
+                                    <span>Limite</span>
                                     <select name="limit" id="capture_limit" class="form-control">
                                         @foreach ([12, 24, 48, 100] as $limit)
                                             <option value="{{ $limit }}" @if ($limit == request()->get('limit', 12)) selected="selected" @endif>{{ $limit }}</option>
                                         @endforeach
                                     </select>
+                                </label>
+
+                                <label for="capture_analyzed" class="form-label p-2">
+                                    <span>Analisadas</span>
+                                    <input type="checkbox" class="form-control" name="analyzed" id="capture_analyzed" value="1" @if (request()->get('analyzed')) checked="checked" @endif>
                                 </label>
 
                                 <span class="p-2 align-self-end">

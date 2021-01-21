@@ -33,6 +33,10 @@ class AnalysisController extends Controller
             $filters['filter[class]'] = $request->get('radiant');
         }
 
+        if (!empty($request->get('analyzed'))) {
+            $filters['filter[analyzed]'] = 'true';
+        }
+
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 12);
         $filters = urldecode(http_build_query($filters));

@@ -62,6 +62,11 @@
                                     </select>
                                 </label>
 
+                                <label for="capture_analyzed" class="form-label p-2">
+                                    <span>Analisadas</span>
+                                    <input type="checkbox" class="form-control" name="analyzed" id="capture_analyzed" value="1" @if (request()->get('analyzed')) checked="checked" @endif>
+                                </label>
+
                                 <span class="p-2 align-self-end">
                                     <input type="submit" class="btn btn-primary" value="Buscar" style="margin-bottom: 8px !important">
                                 </span>
