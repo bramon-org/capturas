@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Services\HttpClient;
-use Carbon\Carbon;
 use Error;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Support\Facades\Cache;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -62,7 +60,7 @@ class Controller extends BaseController
                 'total' => 1,
             ]);
 
-            info($error->getTraceAsString());
+            info($error->getMessage(), $error->getTraceAsString());
         }
 
         $jsonConverted = mb_convert_encoding($json, "UTF-8");
