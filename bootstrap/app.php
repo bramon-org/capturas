@@ -71,7 +71,6 @@ $app->configure('app');
 
 $app->routeMiddleware(['admin' => App\Http\Middleware\Admin::class]);
 $app->routeMiddleware(['operator' => App\Http\Middleware\Operator::class]);
-$app->routeMiddleware(['editor' => App\Http\Middleware\Editor::class]);
 
 /*
 |--------------------------------------------------------------------------
@@ -85,9 +84,7 @@ $app->routeMiddleware(['editor' => App\Http\Middleware\Editor::class]);
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
-$app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
-$app->register(Lorisleiva\LaravelDeployer\LaravelDeployerServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
 /*

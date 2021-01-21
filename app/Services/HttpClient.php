@@ -36,7 +36,7 @@ final class HttpClient extends Client
      * @param string $role
      * @param string $mode The environment
      */
-    public function __construct(string $token = null, string $role = self::ROLE_OPERATOR, string $mode = self::PRODUCTION)
+    public function __construct(string $token = null, string $role = self::ROLE_PUBLIC, string $mode = self::PRODUCTION)
     {
         $this->baseUrl = self::CLIENT_URLS[$mode] ?? self::PRODUCTION;
         $this->headers = [
