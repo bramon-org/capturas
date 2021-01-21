@@ -37,6 +37,6 @@ class CapturesController extends Controller
         $capturas = $this->doRequest('GET', "captures?page={$page}&limit={$limit}&{$filters}");
         $radiantes = $this->getRadiants();
 
-        return view('capturas.index', ['estacoes' => $estacoes['data'], 'capturas' => $capturas, 'radiantes' => $radiantes]);
+        return view('capturas.index', ['estacoes' => $estacoes['data'] ?? [], 'capturas' => $capturas, 'radiantes' => $radiantes]);
     }
 }
