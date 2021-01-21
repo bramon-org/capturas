@@ -11,7 +11,7 @@
                     <div class="row">
                         <form method="get" action="" class="form">
                             <ul class="list-inline p-2">
-                                @forelse($estacoes as $station)
+                                @forelse($estacoes['data'] as $station)
                                 <li class="list-inline-item">
                                     <label for="station_{{ $station['id'] }}">
                                         <input type="checkbox" id="station_{{ $station['id'] }}" name="station[]" value="{{ $station['id'] }}" @if (in_array($station['id'], request()->get('station', []))) checked="checked" @endif>
@@ -100,7 +100,6 @@
                     $parameters = request()->all();
                     @endphp
                     <nav aria-label="...">
-                        @if ($capturas)
                         <ul class="pagination justify-content-center">
                             @php
                                 $prevParams = $parameters;
@@ -118,7 +117,6 @@
                                 <a class="page-link @if (empty($capturas['next_page_url'])) disabled @endif" href="?{{ urldecode(http_build_query($nextParams)) }}">Próxima</a>
                             </li>
                         </ul>
-                        @endif
                     </nav>
                 </div>
             </div>

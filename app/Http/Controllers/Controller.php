@@ -43,7 +43,24 @@ class Controller extends BaseController
 
             $json = $response->getBody()->getContents();
         } catch (ClientException|Error|GuzzleException $error) {
-            $json = json_encode(['error' => $error->getMessage()]);
+            $json = json_encode([
+                'error' => [
+                    'message' => $error->getMessage(),
+                    'debug' => env('APP_DEBUG', false) ? $error->getTraceAsString() : false,
+                ],
+                'data' => [],
+                'current_page' => 1,
+                'first_page_url' => '',
+                'from' => '',
+                'last_page' => 1,
+                'last_page_url' => '',
+                'next_page_url' => '',
+                'path' => '',
+                'per_page' => 1,
+                'prev_page_url' => '',
+                'to' => '',
+                'total' => 1,
+            ]);
 
             info($error->getTraceAsString());
         }
