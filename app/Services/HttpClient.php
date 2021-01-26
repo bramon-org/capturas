@@ -42,8 +42,6 @@ final class HttpClient extends Client
         $this->headers = [
             'Content-Type' => 'application/json',
             'User-Agent' => self::USER_AGENT,
-            'Cache-Control' => 'no-cache',
-            'Connection' => 'Keep-Alive',
             'Accept' => 'application/json',
         ];
 
