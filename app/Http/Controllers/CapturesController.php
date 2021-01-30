@@ -48,6 +48,10 @@ class CapturesController extends Controller
             return $this->doRequest('GET', $uri);
         });
 
-        return view('capturas.index', ['estacoes' => $estacoes, 'capturas' => $capturas, 'radiantes' => $radiantes]);
+        $capturasClean = array_filter($capturas, function ($captura) {
+            return array_key_exists('files', $captura);
+        });
+
+        return view('capturas.index', ['estacoes' => $estacoes, 'capturas' => $capturasClean, 'radiantes' => $radiantes]);
     }
 }
