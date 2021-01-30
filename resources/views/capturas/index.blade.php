@@ -74,6 +74,7 @@
                                 $imagem = array_pop($imagem);
                             @endphp
 
+                            @if ($imagem)
                             <div class="col-sm-6 col-lg-3">
                                 <div class="card">
                                     <a href="{{ str_replace('T.jpg', 'P.jpg', $imagem['url']) }}" data-lightbox="roadtrip">
@@ -93,6 +94,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @empty
                             <div class="alert">
                                 Sem capturas

@@ -48,7 +48,7 @@ class CapturesController extends Controller
             return $this->doRequest('GET', $uri);
         });
 
-        $capturas['data'] = array_filter($capturas, function ($captura) {
+        $capturas['data'] = array_filter($capturas['data'], function ($captura) {
             return array_key_exists('files', $captura);
         });
 
