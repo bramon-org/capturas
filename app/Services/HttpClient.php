@@ -2,6 +2,8 @@
 namespace App\Services;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use Kevinrob\GuzzleCache\CacheMiddleware;
 
 final class HttpClient extends Client
 {
@@ -43,16 +45,22 @@ final class HttpClient extends Client
             'Content-Type' => 'application/json',
             'User-Agent' => self::USER_AGENT,
             'Accept' => 'application/json',
+            'Cache-Control' => 'no-cache',
+            'Connection' => 'Keep-Alive',
         ];
 
         if ($token) {
             $this->headers['Authorization'] = 'Bearer ' . $token;
         }
 
+        $stack = HandlerStack::create();
+        $stack->push(new CacheMiddleware(), 'cache');
+
         parent::__construct([
             'base_uri' => "{$this->baseUrl}{$role}/",
             'headers' => $this->headers,
             'verify' => false,
+            'handler' => $stack,
         ]);
     }
 }
