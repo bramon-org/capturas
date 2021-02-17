@@ -12,6 +12,8 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    const DEFAULT_CACHE_TIME = 8400;
+
     protected HttpClient $httpClient;
 
     /**
@@ -80,7 +82,7 @@ class Controller extends BaseController
 
         $stations = $this->doRequest('GET', 'stations?limit=1000');
 
-        Cache::put('stations', $stations, Carbon::now()->addMinutes(10));
+        Cache::put('stations', $stations, Carbon::now()->addMinutes(self::DEFAULT_CACHE_TIME));
 
         return $stations;
     }
@@ -103,7 +105,7 @@ class Controller extends BaseController
             $radiantsIndexed[ $tmp[0] ] = $tmp[1];
         }
 
-        Cache::put('radiants', $radiantsIndexed, Carbon::now()->addMinutes(10));
+        Cache::put('radiants', $radiantsIndexed, Carbon::now()->addMinutes(self::DEFAULT_CACHE_TIME));
 
         return $radiantsIndexed;
     }
