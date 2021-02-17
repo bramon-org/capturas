@@ -1,6 +1,6 @@
 # Capturas - BRAMON
 
-Exibição de capturas da API BRAMON.
+Cliente para a API da BRAMON.
 
 ### Instalação
 
