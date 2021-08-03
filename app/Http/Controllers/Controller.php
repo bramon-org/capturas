@@ -3,17 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Services\HttpClient;
-use Carbon\Carbon;
 use Error;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Support\Facades\Cache;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    const DEFAULT_CACHE_TIME = 8400;
-
     protected HttpClient $httpClient;
 
     /**
@@ -62,8 +58,6 @@ class Controller extends BaseController
                 'to' => '',
                 'total' => 1,
             ]);
-
-            info([$error->getMessage(), $error->getTraceAsString()]);
         }
 
         $jsonConverted = mb_convert_encoding($json, "UTF-8");
@@ -76,13 +70,17 @@ class Controller extends BaseController
      */
     protected function getAllStations()
     {
-        if (Cache::has('stations')) {
-            return Cache::get('stations');
+        $cacheFile = app()->storagePath() . '/stations.json';
+        $cacheLife = 24 * 60 * 60;
+        $now = time();
+
+        if (file_exists($cacheFile) && ($now - filemtime($cacheFile) < $cacheLife)) {
+            return file_get_contents($cacheFile);
         }
 
         $stations = $this->doRequest('GET', 'stations?limit=1000');
 
-        Cache::put('stations', $stations, Carbon::now()->addMinutes(self::DEFAULT_CACHE_TIME));
+        file_put_contents($cacheFile, $stations);
 
         return $stations;
     }
@@ -92,10 +90,6 @@ class Controller extends BaseController
      */
     protected function getRadiants()
     {
-        if (Cache::has('radiants')) {
-            return Cache::get('radiants');
-        }
-
         $radiants = file( __DIR__  . '/../../../resources/data/radiants.txt', FILE_IGNORE_NEW_LINES);
         $radiantsIndexed = [];
 
@@ -104,8 +98,6 @@ class Controller extends BaseController
 
             $radiantsIndexed[ $tmp[0] ] = $tmp[1];
         }
-
-        Cache::put('radiants', $radiantsIndexed, Carbon::now()->addMinutes(self::DEFAULT_CACHE_TIME));
 
         return $radiantsIndexed;
     }
